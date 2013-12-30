@@ -35,7 +35,7 @@ public class Player implements OnPreparedListener, MediaPlayerControl {
 		mediaPlayer.setOnPreparedListener(this);
 		mediaPlayer.setLooping(false);
 		mediaPlayerControl = this;
-		//start();
+		// start();
 	}
 
 	public void stop() {

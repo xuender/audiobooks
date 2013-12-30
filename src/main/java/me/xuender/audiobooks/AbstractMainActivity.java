@@ -16,7 +16,7 @@ import android.widget.Toast;
 public abstract class AbstractMainActivity extends Activity {
 	private ExitHandler exitHandler = new ExitHandler();
 	private Player player;
-	private ResIds ids;
+	private AdRes adRes;
 
 	private void exit() {
 		if (exitHandler.isExit()) {
@@ -25,22 +25,22 @@ public abstract class AbstractMainActivity extends Activity {
 			return;
 		}
 		exitHandler.setExit(true);
-		Toast.makeText(getApplicationContext(), ids.getExitMsg(),
+		Toast.makeText(getApplicationContext(), adRes.getExitMsgId(),
 				Toast.LENGTH_SHORT).show();
 		exitHandler.sendEmptyMessageDelayed(0, 2000);
 	}
 
-	protected abstract ResIds getResIds();
+	protected abstract AdRes getAdRes();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ids = getResIds();
-		setContentView(ids.getLayout());
-		player = new Player(this, ids.getRaw(), findViewById(ids.getMainView()));
+		adRes = getAdRes();
+		setContentView(adRes.getLayoutId());
+		player = new Player(this, adRes.getRawId(), findViewById(adRes.getMainViewId()));
 		player.start();
-		ScrollTextView stv = (ScrollTextView) findViewById(ids.getScroll());
-		stv.setResIds(ids);
+		ScrollTextView stv = (ScrollTextView) findViewById(adRes.getScrollId());
+		stv.setResIds(adRes);
 		new PositionRunnable(player, stv).start();
 	}
 
