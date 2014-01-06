@@ -13,6 +13,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.TypedValue;
 import android.widget.TextView;
 
 /**
@@ -25,6 +28,7 @@ public class ScrollTextView extends TextView {
     private float width;
     private float height;
     private float textSize = 18;
+    private float currentTextSize = 24;
     private float textHeight = 25;
     private int index = 0;
     private float move = 0;
@@ -57,6 +61,16 @@ public class ScrollTextView extends TextView {
         otherPaint = new Paint();
         otherPaint.setAntiAlias(true);
         otherPaint.setTextAlign(Paint.Align.CENTER);
+
+
+        currentPaint.setColor(currentColor);
+        otherPaint.setColor(otherColor);
+
+        currentPaint.setTextSize(currentTextSize);
+        currentPaint.setTypeface(Typeface.SERIF);
+
+        otherPaint.setTextSize(textSize);
+        otherPaint.setTypeface(Typeface.DEFAULT);
     }
 
     @Override
@@ -65,23 +79,17 @@ public class ScrollTextView extends TextView {
         if (canvas == null || scrollTexts.size() == 0) {
             return;
         }
-
-        currentPaint.setColor(currentColor);
-        otherPaint.setColor(otherColor);
-
-        currentPaint.setTextSize(24);
-        currentPaint.setTypeface(Typeface.SERIF);
-
-        otherPaint.setTextSize(textSize);
-        otherPaint.setTypeface(Typeface.DEFAULT);
-
         setText("");
         canvas.drawText(scrollTexts.get(index).getString(), width / 2, height
                 / 2 - move, currentPaint);
 
         float tempY = height / 2;
         // 画出本句之前的句子
-        for (int i = index - 1; i >= 0; i--) {
+        int end = 0;
+        if (index - 20 > end) {
+            end = index - 20;
+        }
+        for (int i = index - 1; i >= end; i--) {
             // 向上推移
             tempY = tempY - textHeight;
             canvas.drawText(scrollTexts.get(i).getString(), width / 2, tempY
@@ -89,7 +97,11 @@ public class ScrollTextView extends TextView {
         }
         tempY = height / 2;
         // 画出本句之后的句子
-        for (int i = index + 1; i < scrollTexts.size(); i++) {
+        end = scrollTexts.size();
+        if (index + 21 < end) {
+            end = index + 21;
+        }
+        for (int i = index + 1; i < end; i++) {
             // 往下推移
             tempY = tempY + textHeight;
             canvas.drawText(scrollTexts.get(i).getString(), width / 2, tempY
@@ -102,6 +114,16 @@ public class ScrollTextView extends TextView {
         super.onSizeChanged(w, h, oldw, oldh);
         this.width = w;
         this.height = h;
+        Log.d("width", String.valueOf(width));
+        textSize = (float) width / 24f;
+        Log.d("textSize", String.valueOf(textSize));
+        textHeight = (float) width / 17.28f;
+        Log.d("textHeight", String.valueOf(textHeight));
+        currentTextSize = (float) width / 18f;
+        Log.d("currentTextSize", String.valueOf(currentTextSize));
+        currentPaint.setTextSize(currentTextSize);
+        currentPaint.setTextSize(currentTextSize);
+        otherPaint.setTextSize(textSize);
     }
 
     public void setPosition(int position) {
@@ -134,5 +156,7 @@ public class ScrollTextView extends TextView {
         }
         currentColor = resIds.getCurrentColor();
         otherColor = resIds.getOtherColor();
+        currentPaint.setColor(currentColor);
+        otherPaint.setColor(otherColor);
     }
 }
