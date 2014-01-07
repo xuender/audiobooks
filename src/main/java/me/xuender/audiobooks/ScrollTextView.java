@@ -56,11 +56,13 @@ public class ScrollTextView extends TextView {
         currentPaint = new Paint();
         currentPaint.setAntiAlias(true); // 设置抗锯齿，让文字美观饱满
         currentPaint.setTextAlign(Paint.Align.CENTER);// 设置文本对齐方式
+        currentPaint.setFakeBoldText(true);
 
         // 非高亮部分
         otherPaint = new Paint();
         otherPaint.setAntiAlias(true);
         otherPaint.setTextAlign(Paint.Align.CENTER);
+        otherPaint.setFakeBoldText(true);
 
 
         currentPaint.setColor(currentColor);
@@ -115,11 +117,11 @@ public class ScrollTextView extends TextView {
         this.width = w;
         this.height = h;
         Log.d("width", String.valueOf(width));
-        textSize = (float) width / 24f;
+        textSize = (float) width / 21.5f;
         Log.d("textSize", String.valueOf(textSize));
-        textHeight = (float) width / 17.28f;
+        textHeight = (float) width / 16.8f;
         Log.d("textHeight", String.valueOf(textHeight));
-        currentTextSize = (float) width / 18f;
+        currentTextSize = (float) width / 17.2f;
         Log.d("currentTextSize", String.valueOf(currentTextSize));
         currentPaint.setTextSize(currentTextSize);
         currentPaint.setTextSize(currentTextSize);
