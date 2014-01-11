@@ -51,11 +51,11 @@ public class ScrollTextView extends TextView {
     }
 
     private void init() {
-        setFocusable(true); // 设置可对焦
+        setFocusable(true);
         // 高亮部分
         currentPaint = new Paint();
-        currentPaint.setAntiAlias(true); // 设置抗锯齿，让文字美观饱满
-        currentPaint.setTextAlign(Paint.Align.CENTER);// 设置文本对齐方式
+        currentPaint.setAntiAlias(true);
+        currentPaint.setTextAlign(Paint.Align.CENTER);
         currentPaint.setFakeBoldText(true);
 
         // 非高亮部分
@@ -87,25 +87,23 @@ public class ScrollTextView extends TextView {
 
         float tempY = height / 2;
         // 画出本句之前的句子
-        int end = 0;
-        if (index - 20 > end) {
-            end = index - 20;
-        }
-        for (int i = index - 1; i >= end; i--) {
+        for (int i = index - 1; i >= 0; i--) {
             // 向上推移
             tempY = tempY - textHeight;
+            if (tempY - move - textHeight <= 0) {
+                break;
+            }
             canvas.drawText(scrollTexts.get(i).getString(), width / 2, tempY
                     - move, otherPaint);
         }
         tempY = height / 2;
         // 画出本句之后的句子
-        end = scrollTexts.size();
-        if (index + 21 < end) {
-            end = index + 21;
-        }
-        for (int i = index + 1; i < end; i++) {
+        for (int i = index + 1; i < scrollTexts.size(); i++) {
             // 往下推移
             tempY = tempY + textHeight;
+            if (tempY - move + textHeight > height) {
+                break;
+            }
             canvas.drawText(scrollTexts.get(i).getString(), width / 2, tempY
                     - move, otherPaint);
         }

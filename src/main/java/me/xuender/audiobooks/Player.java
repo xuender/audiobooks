@@ -7,6 +7,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.MediaController;
 import android.widget.MediaController.MediaPlayerControl;
@@ -53,6 +54,7 @@ public class Player implements OnPreparedListener, MediaPlayerControl {
     @Override
     public void pause() {
         mediaPlayer.pause();
+//        Log.d("pause", String.valueOf(mediaPlayer.getCurrentPosition()));
     }
 
     @Override

@@ -12,7 +12,7 @@ import android.widget.Toast;
 /**
  * @author ender
  */
-public abstract class AbstractMainActivity extends Activity {
+public abstract class AbstractAudioBookActivity extends Activity {
     private ExitHandler exitHandler = new ExitHandler();
     private Player player;
     private AdRes adRes;
