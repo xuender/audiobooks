@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package me.xuender.audiobooks;
 
@@ -12,24 +12,27 @@ import android.widget.MediaController.MediaPlayerControl;
 
 /**
  * Call Receiver
- * 
+ *
  * @author ender
- * 
  */
 public class CallReceiver extends BroadcastReceiver {
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		MediaPlayerControl mediaPlayerControl = Player.getMediaPlayerControl();
-		TelephonyManager tm = (TelephonyManager) context
-				.getSystemService(Service.TELEPHONY_SERVICE);
-		switch (tm.getCallState()) {
-		case TelephonyManager.CALL_STATE_RINGING:
-			mediaPlayerControl.pause();
-			break;
-		case TelephonyManager.CALL_STATE_IDLE:
-			if (!mediaPlayerControl.isPlaying()) {
-				mediaPlayerControl.start();
-			}
-		}
-	}
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        MediaPlayerControl mediaPlayerControl = Player.getMediaPlayerControl();
+        if (mediaPlayerControl == null) {
+            return;
+        }
+        TelephonyManager tm = (TelephonyManager) context
+                .getSystemService(Service.TELEPHONY_SERVICE);
+        switch (tm.getCallState()) {
+            case TelephonyManager.CALL_STATE_RINGING:
+                mediaPlayerControl.pause();
+                break;
+            case TelephonyManager.CALL_STATE_IDLE:
+                if (!mediaPlayerControl.isPlaying()) {
+                    mediaPlayerControl.start();
+                }
+                break;
+        }
+    }
 }

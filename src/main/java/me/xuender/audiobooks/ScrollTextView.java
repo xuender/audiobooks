@@ -117,7 +117,7 @@ public class ScrollTextView extends TextView {
         Log.d("width", String.valueOf(width));
         textSize = (float) width / 21.5f;
 //        Log.d("textSize", String.valueOf(textSize));
-        textHeight = (float) width / 12f;
+        textHeight = (float) width / 14f;
 //        Log.d("textHeight", String.valueOf(textHeight));
         currentTextSize = (float) width / 17.2f;
 //        Log.d("currentTextSize", String.valueOf(currentTextSize));
