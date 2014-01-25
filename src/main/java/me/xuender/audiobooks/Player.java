@@ -54,7 +54,7 @@ public class Player implements OnPreparedListener, MediaPlayerControl {
     @Override
     public void pause() {
         mediaPlayer.pause();
-//        Log.d("pause", String.valueOf(mediaPlayer.getCurrentPosition()));
+//        Log.e("pause", String.valueOf(mediaPlayer.getCurrentPosition()));
     }
 
     @Override

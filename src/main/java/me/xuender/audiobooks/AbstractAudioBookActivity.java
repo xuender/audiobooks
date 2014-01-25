@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 /**
@@ -35,10 +36,12 @@ public abstract class AbstractAudioBookActivity extends Activity {
         super.onCreate(savedInstanceState);
         adRes = getAdRes();
         setContentView(adRes.getLayoutId());
-        player = new Player(this, adRes.getRawId(), findViewById(adRes.getMainViewId()));
-        player.start();
         ScrollTextView stv = (ScrollTextView) findViewById(adRes.getScrollId());
         stv.setResIds(adRes);
+        player = new Player(this, adRes.getRawId(), findViewById(adRes.getMainViewId()));
+        player.start();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         new PositionRunnable(player, stv).start();
     }
 

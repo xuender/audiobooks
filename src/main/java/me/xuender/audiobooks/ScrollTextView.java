@@ -116,11 +116,11 @@ public class ScrollTextView extends TextView {
         this.height = h;
         Log.d("width", String.valueOf(width));
         textSize = (float) width / 21.5f;
-        Log.d("textSize", String.valueOf(textSize));
-        textHeight = (float) width / 16.8f;
-        Log.d("textHeight", String.valueOf(textHeight));
+//        Log.d("textSize", String.valueOf(textSize));
+        textHeight = (float) width / 12f;
+//        Log.d("textHeight", String.valueOf(textHeight));
         currentTextSize = (float) width / 17.2f;
-        Log.d("currentTextSize", String.valueOf(currentTextSize));
+//        Log.d("currentTextSize", String.valueOf(currentTextSize));
         currentPaint.setTextSize(currentTextSize);
         currentPaint.setTextSize(currentTextSize);
         otherPaint.setTextSize(textSize);
