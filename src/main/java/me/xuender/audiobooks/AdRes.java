@@ -4,6 +4,7 @@
 package me.xuender.audiobooks;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 
 /**
  * @author ender
@@ -17,6 +18,16 @@ public class AdRes {
     private int scrollTextId;
     private int currentColor = Color.argb(210, 29, 248, 240);
     private int otherColor = Color.argb(140, 0, 0, 0);
+    private Paint.Align textAlign = Paint.Align.CENTER;
+
+    public Paint.Align getTextAlign() {
+        return textAlign;
+    }
+
+    public void setTextAlign(Paint.Align textAlign) {
+        this.textAlign = textAlign;
+    }
+
 
     public int getOtherColor() {
         return otherColor;

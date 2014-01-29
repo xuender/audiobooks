@@ -82,7 +82,11 @@ public class ScrollTextView extends TextView {
             return;
         }
         setText("");
-        canvas.drawText(scrollTexts.get(index).getString(), width / 2, height
+        float left = width / 2;
+        if (currentPaint.getTextAlign() == Paint.Align.LEFT) {
+            left = 0;
+        }
+        canvas.drawText(scrollTexts.get(index).getString(), left, height
                 / 2 - move, currentPaint);
 
         float tempY = height / 2;
@@ -93,7 +97,7 @@ public class ScrollTextView extends TextView {
             if (tempY - move - textHeight <= 0) {
                 break;
             }
-            canvas.drawText(scrollTexts.get(i).getString(), width / 2, tempY
+            canvas.drawText(scrollTexts.get(i).getString(), left, tempY
                     - move, otherPaint);
         }
         tempY = height / 2;
@@ -104,7 +108,7 @@ public class ScrollTextView extends TextView {
             if (tempY - move + textHeight > height) {
                 break;
             }
-            canvas.drawText(scrollTexts.get(i).getString(), width / 2, tempY
+            canvas.drawText(scrollTexts.get(i).getString(), left, tempY
                     - move, otherPaint);
         }
     }
@@ -158,5 +162,7 @@ public class ScrollTextView extends TextView {
         otherColor = resIds.getOtherColor();
         currentPaint.setColor(currentColor);
         otherPaint.setColor(otherColor);
+        otherPaint.setTextAlign(resIds.getTextAlign());
+        currentPaint.setTextAlign(resIds.getTextAlign());
     }
 }

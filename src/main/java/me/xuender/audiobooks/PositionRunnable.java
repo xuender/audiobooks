@@ -27,9 +27,9 @@ public class PositionRunnable implements Runnable {
     public void run() {
         if (player.isPlaying()) {
             view.setPosition(player.getCurrentPosition());
-//            if (player.getCurrentPosition() > 35004) {
-//                player.show();
-//            }
+            if (player.getCurrentPosition() > 35004) {
+                player.show();
+            }
         }
         handler.postDelayed(this, 100);
     }
